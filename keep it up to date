@@ -3,3 +3,10 @@ sudo apt-get upgrade<br>
 sudo apt-get dist-upgrade<br>
 sudo rpi-update
 sudo reboot
+
+
+newest version of Raspbian, with geany and gpio-access without sudo
+sudo apt-get update
+sudo apt-get dist-upgrade
+sudo apt-get install piclone geany usb-modeswitch pi-bluetooth
+sudo apt-get install python-pigpio python3-pigpio
