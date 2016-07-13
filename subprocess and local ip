@@ -1,0 +1,27 @@
+import subprocess
+
+def parse(wholestring,startseq,endseq,start=0,end=-1):
+    if end == -1:
+        end = len(wholestring)
+    sp = wholestring.find(startseq,start,end)
+    if sp > 0:
+        ep = wholestring.find(endseq,sp+len(startseq),end)
+    if sp > 0 and ep > 0:
+        return [sp,wholestring[sp+len(startseq):ep]]
+
+    
+com_str = 'ifconfig -a'
+command = subprocess.Popen([com_str], stdout=subprocess.PIPE, shell=True)
+(output, error) = command.communicate()
+print output
+print
+
+link = True
+start=0
+while link:
+    link = parse(output,"Link encap:"," ",start)
+    if link != None:
+        start = link[0]+1
+        ip = parse(output,"inet addr:"," ",start)
+        if ip != None:
+            print link[1], ip[1]
